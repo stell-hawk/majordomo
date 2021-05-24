@@ -5,6 +5,7 @@
  * @return void
  */
 function clearCacheData($prefix=false) {
+		$prefix=strtolower($prefix);
     /*
     $apcu_available = function_exists('apcu_enabled') && apcu_enabled();
     if ($apcu_available) {
@@ -41,6 +42,7 @@ function clearCacheData($prefix=false) {
  */
 function getAllCache($prefix)
 {
+	$prefix=strtolower($prefix);
 	$out=array();
     if (defined('USE_REDIS')) {
         global $redisConnection;
@@ -64,7 +66,7 @@ function getAllCache($prefix)
  */
 function saveToCache($key, $value)
 {
-
+		$key=strtolower($key);
     if (is_array($value) || strlen($value) > 255) {
         return;
     }
@@ -98,7 +100,7 @@ function saveToCache($key, $value)
  */
 function checkFromCache($key)
 {
-
+		$key=strtolower($key);
     if (defined('USE_REDIS')) {
         global $redisConnection;
         if (!isset($redisConnection)) {
